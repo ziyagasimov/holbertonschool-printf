@@ -1,0 +1,80 @@
+#include <stdarg.h>
+#include <unistd.h>
+
+/**
+ * print_number - Prints an integer to stdout
+ * @n: The integer to print
+ */
+void print_number(int n)
+{
+	if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return;
+	}
+
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = -n;
+	}
+
+	if (n / 10)
+		print_number(n / 10);
+
+	_putchar('0' + (n % 10));
+}
+
+/**
+ * _putchar - Writes a character to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
+/**
+ * my_printf - Prints formatted output for %d and %i specifiers
+ * @format: The format string
+ *
+ * Return: Number of characters printed
+ */
+int my_printf(const char *format, ...)
+{
+	va_list args;
+	int i, count = 0;
+
+	va_start(args, format);
+
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (format[i] == '%' && (format[i + 1] == 'd' || format[i + 1] == 'i'))
+		{
+			print_number(va_arg(args, int));
+			i++;
+		}
+		else
+		{
+			_putchar(format[i]);
+			count++;
+		}
+	}
+
+	va_end(args);
+
+	return (count);
+}
+
+/**
+ * main - Entry point for testing my_printf
+ *
+ * Return: Always 0
+ */
+int main(void)
+{
+	my_printf("Number: %d and %i\n", 42, -7);
+	return (0);
+}
