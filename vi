@@ -1,0 +1,7 @@
+#include "main.h"
+
+int main(void)
+{
+    _printf("Number: %d and %i\n", 42, -7);
+    return (0);
+}
