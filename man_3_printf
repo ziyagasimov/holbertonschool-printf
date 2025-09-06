@@ -1,0 +1,101 @@
+.TH _PRINTF "September/2025" "1.0" "Manpage _printf" "Library Functions"
+
+.SH NAME
+_printf \- function that prints formatted output (strings, characters, numbers, etc.)
+
+.SH SYNOPSIS
+#include "main.h"
+
+.RS
+    #include <unistd.h>
+    #include <stdarg.h>
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <limits.h>
+.RE
+
+.PP
+int
+.B _printf
+(const char *format, ...);
+
+.PP
+Helper functions (may vary by implementation):
+.PP
+int _putchar(char c);  
+int print_c(va_list arg);  
+int print_s(va_list arg);  
+int print_r(va_list arg);  
+int print_id(va_list arg);  
+int print_u(va_list arg);  
+
+.SH DESCRIPTION
+The
+.B _printf
+function is a custom implementation of the standard C library function
+.I printf
+declared in <stdio.h>.
+
+.PP
+It prints formatted strings, characters, integers, and other data types.
+
+.PP
+.QS Return value:
+On success, the function returns the number of characters printed (excluding the null byte used to end output to strings).  
+If an output error occurs, a negative value is returned.
+
+.SH OPTIONS
+Supported conversion specifiers:
+
+.PP
+.IP
+SYNTAX : %[option]
+
+.TP
+.B %c
+Prints a single character.  
+Example: `_printf("%c", 'c');`
+
+.TP
+.B %s
+Prints a string.  
+Example: `_printf("%s", "Hello World");`
+
+.TP
+.B %d, %i
+Prints an integer (signed decimal).  
+Example: `_printf("%d", 2025);`
+
+.TP
+.B %b
+Prints an unsigned int argument as binary.  
+Example: `_printf("%b", 13);   // 1101`
+
+.TP
+.B %r
+Prints a string in reverse.  
+Example: `_printf("%r", "Hello");   // olleH`
+
+.TP
+.B %R
+Applies the ROT13 cipher to a string.  
+Example: `_printf("%R", "HELLO");   // URYYB`
+
+.TP
+.B %o, %u, %x, %X
+Prints an unsigned int in different bases:  
+- `%o`: octal  
+- `%u`: unsigned decimal  
+- `%x`: hexadecimal (lowercase letters)  
+- `%X`: hexadecimal (uppercase letters)  
+
+Example: `_printf("%x", 255);   // ff`
+
+.SH BUGS
+No known bugs at the moment.
+
+.SH AUTHOR
+Written by Ziya Gasimov — GitHub: https://github.com/ziyagasimov
+
+.SH SEE ALSO
+printf(3) : https://linux.die.net/man/3/printf
